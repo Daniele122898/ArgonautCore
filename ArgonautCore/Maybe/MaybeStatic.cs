@@ -95,6 +95,19 @@ namespace ArgonautCore.Maybe
         {
             return Task.FromResult(new Maybe<T>(new Exception(err)));
         }
+
+        /// <summary>
+        /// Helper function that returns a Maybe as a ZERO. Carring no value and no exception.
+        /// Lightweight null wrapper
+        /// </summary>
+        /// <param name="hasVal">If it has a value that is just nothing</param>
+        /// <param name="hasError">If it has an error that is just null</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static Maybe<T> Zero<T>(bool hasVal = false, bool hasError = false)
+        {
+            return new Maybe<T>(hasVal, hasError);
+        }
         
     }
 }

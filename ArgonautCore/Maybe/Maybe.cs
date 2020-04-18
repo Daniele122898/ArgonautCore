@@ -67,6 +67,18 @@ namespace ArgonautCore.Maybe
             Error = new Exception(errorMessage);
             HasError = true;
         }
+        
+        /// <summary>
+        /// This should be used to set the Maybe to ZERO. Meaning it has no value and no error
+        /// used for null wrapping
+        /// </summary>
+        /// <param name="hasVal">If it has a value that is just nothing</param>
+        /// <param name="hasError">If it has an error that is just null</param>
+        public Maybe(bool hasVal = false, bool hasError = false)
+        {
+            HasValue = hasVal;
+            HasError = hasError;
+        }
 
         /// <summary>
         /// Pass in two actions. The some action will be called if the maybe has a value stored.
