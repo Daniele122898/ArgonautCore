@@ -1,17 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>8</LangVersion>
 
         <PackageId>ArgonautCore</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.2.1</Version>
         <Authors>daniele_serenity</Authors>
         <Company>Argonaut Developments</Company>
         <PackageProjectUrl>https://github.com/Daniele122898/ArgonautCore</PackageProjectUrl>
         <Description>Core Library with fundamental functions</Description>
         <Copyright>Copyright 2020 (c) by Serenity. All rights reserved.</Copyright>
         <PackageTags>Core CoreLibrary Fundamentals</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\ArgonautCore.xml</DocumentationFile>
     </PropertyGroup>
 
 </Project>
