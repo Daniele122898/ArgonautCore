@@ -81,6 +81,46 @@ namespace ArgonautCore.Maybe
         }
 
         /// <summary>
+        /// This method should be used if the Maybe could be a Zero.
+        /// This will call the some function if the Maybe holds a value.
+        /// Otherwise it will call the none function with the error even if
+        /// it has none and is null. 
+        /// </summary>
+        /// <param name="some">Action if maybe has a value</param>
+        /// <param name="none">Action if it has none</param>
+        public void Some(Action<TVal> some, Action<Exception> none)
+        {
+            if (this.HasValue)
+            {
+                some(this.Value);
+            }
+            else
+            {
+                none(this.Error);
+            }
+        }
+
+        /// <summary>
+        /// This method should be used if the Maybe could be a Zero.
+        /// This will call the some function if the Maybe holds a value.
+        /// Otherwise it will call the none function with the error even if
+        /// it has none and is null. 
+        /// </summary>
+        /// <param name="some">Action if maybe has a value</param>
+        /// <param name="none">Action if it has none</param>
+        public async Task SomeAsync(Func<TVal, Task> some, Func<Exception, Task> none)
+        {
+            if (this.HasValue)
+            {
+                await some(this.Value).ConfigureAwait(false);
+            }
+            else
+            {
+                await none(this.Error).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
         /// Pass in two actions. The some action will be called if the maybe has a value stored.
         /// The none action will be called if an exception is stored.
         /// </summary>
