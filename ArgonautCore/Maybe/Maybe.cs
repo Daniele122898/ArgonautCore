@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ArgonautCore.Maybe
@@ -34,7 +35,7 @@ namespace ArgonautCore.Maybe
             (TVal val, Exception ex) = initializer();
             this.Value = val;
             this.Error = ex;
-            HasValue = val != null;
+            HasValue = !EqualityComparer<TVal>.Default.Equals(val, default(TVal));
             HasError = ex != null;
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ArgonautCore.Maybe
@@ -18,7 +19,7 @@ namespace ArgonautCore.Maybe
         public static async Task<Maybe<T>> InitAsync<T>(Func<Task<(T Value, Exception error)>> initializer) 
         {
             (T val, Exception ex) = await initializer().ConfigureAwait(false);
-            if (val != null)
+            if (!EqualityComparer<T>.Default.Equals(val, default(T)))
             {
                 return new Maybe<T>(val);
             }
