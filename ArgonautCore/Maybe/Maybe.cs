@@ -4,6 +4,11 @@ using System.Threading.Tasks;
 
 namespace ArgonautCore.Maybe
 {
+    /// <summary>
+    /// This is a somewhat heavy weight implementation of a Maybe value. Use this for operations that might return nothing
+    /// or an error. We dont want to do endless null checks or throw errors everywhere. This is where Maybe comes in.
+    /// For a more lightweight implementation use 
+    /// </summary>
     public class Maybe<TVal>
     {
         /// <summary>
@@ -28,6 +33,12 @@ namespace ArgonautCore.Maybe
 
         /// <summary>
         /// Create a Maybe using an init function/lambda that returns a tuple with the value and/or exception
+        /// <remarks>
+        /// ATTENTION: This checks for value and error differently than the other constructors. It will try and figure out if
+        /// the lambda returned an error or a value. This can result in both or none of the booleans to be set.
+        /// This might also set the maybe to have no value if an int is 0 since that is it's default value.
+        /// Use the other constructors for these cases
+        /// </remarks>
         /// </summary>
         /// <param name="initializer"></param>
         public Maybe(Func<(TVal Value, Exception error)> initializer)
