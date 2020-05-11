@@ -5,5 +5,5 @@
     /// <summary>
     /// Represents the absence of any value since you cannot use void as a type-param.
     /// </summary>
-    public struct None { }
+    public readonly struct None { }
 }
