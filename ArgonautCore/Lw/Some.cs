@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ArgonautCore.Lw
 {
     // Inspired / Copied from https://github.com/sn0w bcs it's better than what i could write by myself kekw
-    
+
     /// <summary>
     /// Wraps a value that is required to be not null. Basically guaranteeing that anything wrapped in Some
     /// will always have a value. Trying to construct a Some wrapper with null will throw
@@ -76,14 +76,14 @@ namespace ArgonautCore.Lw
         /// Checks for equality of the wrapped values.
         /// </summary>
         public static bool operator ==(Some<TVal> left, Some<TVal> right) => left.Equals(right);
-        
+
         /// <summary>
         /// Checks for inequality of the wrapped values.
         /// </summary>
         public static bool operator !=(Some<TVal> left, Some<TVal> right) => !left.Equals(right);
 
         /// <inheritdoc />
-        public bool Equals(Some<TVal> other) => 
+        public bool Equals(Some<TVal> other) =>
             EqualityComparer<TVal>.Default.Equals(Value, other.Value) && _initialized == other._initialized;
 
         /// <inheritdoc />
