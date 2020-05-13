@@ -22,16 +22,75 @@ namespace ArgonautCore.Lw
 
         private readonly TVal _value;
         private readonly TErr _error;
+        private readonly bool _initialized;
 
-        public object BoxValue()
+        /// <summary>
+        /// Constructor taking a <see cref="Some{TVal}"/> with a value
+        /// </summary>
+        /// <param name="value"></param>
+        public Result(Some<TVal> value)
         {
-            throw new NotImplementedException();
+            _error = default;
+            _value = value;
+
+            this.HasValue = true;
+            this.HasError = false;
+            _initialized = true;
         }
 
-        public object BoxError()
+        /// <summary>
+        /// Constructor taking a <see cref="Some{TErr}"/> with an error.
+        /// </summary>
+        /// <param name="error"></param>
+        public Result(Some<TErr> error)
         {
-            throw new NotImplementedException();
+            _value = default;
+            _error = error;
+
+            this.HasValue = false;
+            this.HasError = true;
+            _initialized = true;
         }
+
+        /// <summary>
+        /// Constructor taking a value. This has to be not null or it will throw.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public Result(TVal value)
+        {
+            if (value == null)
+                throw new NullReferenceException("Cannot construct a Result wrapper with a null value");
+            
+            _error = default;
+            _value = value;
+
+            this.HasValue = true;
+            this.HasError = false;
+            _initialized = true;
+        }
+        
+        /// <summary>
+        /// Constructor taking an error. This has to be not null or it will throw.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public Result(TErr error)
+        {
+            if (error == null)
+                throw new NullReferenceException("Cannot construct a Result wrapper with a null error");
+            
+            _error = error;
+            _value = default;
+
+            this.HasValue = false;
+            this.HasError = true;
+            _initialized = true;
+        }
+
+        /// <inheritdoc />
+        public object BoxValue() => this._value;
+
+        /// <inheritdoc />
+        public object BoxError() => this._error;
 
         public bool Equals(Result<TVal, TErr> other)
         {
