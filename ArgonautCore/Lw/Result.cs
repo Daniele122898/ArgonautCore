@@ -27,7 +27,6 @@ namespace ArgonautCore.Lw
         /// <summary>
         /// Constructor taking a <see cref="Some{TVal}"/> with a value
         /// </summary>
-        /// <param name="value"></param>
         public Result(Some<TVal> value)
         {
             _error = default;
@@ -41,7 +40,6 @@ namespace ArgonautCore.Lw
         /// <summary>
         /// Constructor taking a <see cref="Some{TErr}"/> with an error.
         /// </summary>
-        /// <param name="error"></param>
         public Result(Some<TErr> error)
         {
             _value = default;
@@ -84,6 +82,42 @@ namespace ArgonautCore.Lw
             this.HasValue = false;
             this.HasError = true;
             _initialized = true;
+        }
+        
+        /// <summary>
+        /// Convert any TVal to a result of the same type.
+        /// This throws if the value is null
+        /// </summary>
+        public static implicit operator Result<TVal, TErr>(TVal value)
+            => new Result<TVal, TErr>(value);
+        
+        /// <summary>
+        /// Convert any TErr to a result of the same type.
+        /// This throws if the error is null.
+        /// </summary>
+        public static implicit operator Result<TVal, TErr>(TErr error)
+            => new Result<TVal, TErr>(error);
+
+        /// <summary>
+        /// Just syntactic sugar to check if Result has a value. Mostly useful in if statements.
+        /// </summary>
+        public static implicit operator bool(Result<TVal, TErr> result)
+            => result.HasValue;
+
+        private TVal CheckValue()
+        {
+            if (!_initialized)
+                throw new NullReferenceException("Tried to access value of an uninitialized Result<TVal, TErr>");
+
+            return _value;
+        }
+        
+        private TErr CheckError()
+        {
+            if (!_initialized)
+                throw new NullReferenceException("Tried to access error of an uninitialized Result<TVal, TErr>");
+
+            return _error;
         }
 
         /// <inheritdoc />
