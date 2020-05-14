@@ -19,7 +19,7 @@ namespace ArgonautCore.Lw
         /// <summary>
         /// Actual value held by Option. 
         /// </summary>
-        public readonly TVal Value;
+        private readonly TVal _value;
 
         private readonly bool _initialized;
 
@@ -29,7 +29,7 @@ namespace ArgonautCore.Lw
         /// <param name="value"></param>
         public Option(Some<TVal> value)
         {
-            this.Value = value;
+            this._value = value;
             this.HasValue = true;
             _initialized = true;
         }
@@ -44,7 +44,7 @@ namespace ArgonautCore.Lw
                 throw new NullReferenceException(
                     "Cannot construct a Option wrapper with a null value. Use different constructor for a none type");
 
-            this.Value = value;
+            this._value = value;
             this.HasValue = true;
             _initialized = true;
         }
@@ -58,7 +58,7 @@ namespace ArgonautCore.Lw
             if (hasVal)
                 throw new ArgumentException("This constructor can only be used to create none types");
 
-            this.Value = default;
+            this._value = default;
             this.HasValue = false;
             _initialized = true;
         }
@@ -81,7 +81,7 @@ namespace ArgonautCore.Lw
         public static explicit operator TVal(Option<TVal> opt)
         {
             if (opt.HasValue)
-                return opt.Value;
+                return opt._value;
 
             throw new NullReferenceException("Tried casting an Option{TVal} to TVal that doesn't have a value!");
         }
@@ -103,7 +103,7 @@ namespace ArgonautCore.Lw
         public static TVal operator ~(Option<TVal> opt)
         {
             if (opt.HasValue)
-                return opt.Value;
+                return opt._value;
 
             throw new NullReferenceException("Tried unwrapping an Option that doesn't have a value!");
         }
@@ -127,7 +127,7 @@ namespace ArgonautCore.Lw
         public TVal Some()
         {
             if (this.HasValue)
-                return this.Value;
+                return this._value;
 
             throw new NullReferenceException("Tried to access an option that had no value");
         }
@@ -139,7 +139,7 @@ namespace ArgonautCore.Lw
         public void MatchSome(Action<TVal> some)
         {
             if (this.HasValue)
-                some(this.Value);
+                some(this._value);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace ArgonautCore.Lw
         public async Task MatchSomeAsync(Func<TVal, Task> some)
         {
             if (this.HasValue)
-                await some(this.Value).ConfigureAwait(false);
+                await some(this._value).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace ArgonautCore.Lw
         {
             if (this.HasValue)
             {
-                some(this.Value);
+                some(this._value);
                 return;
             }
 
@@ -198,7 +198,7 @@ namespace ArgonautCore.Lw
         public T Match<T>(Func<TVal, T> some, Func<T> none)
         {
             if (this.HasValue)
-                return some(this.Value);
+                return some(this._value);
             return none();
         }
 
@@ -208,7 +208,7 @@ namespace ArgonautCore.Lw
         /// <param name="default"></param>
         /// <returns></returns>
         public TVal SomeOrDefault(Some<TVal> @default)
-            => this.HasValue ? this.Value : ~@default;
+            => this.HasValue ? this._value : ~@default;
 
         /// <summary>
         /// Return the value if present or a computed default
@@ -216,7 +216,7 @@ namespace ArgonautCore.Lw
         /// <param name="default"></param>
         /// <returns></returns>
         public TVal SomeOrDefault(Func<TVal> @default)
-            => this.HasValue ? this.Value : @default();
+            => this.HasValue ? this._value : @default();
 
         /// <summary>
         /// Return the value if present or a computed default
@@ -224,23 +224,23 @@ namespace ArgonautCore.Lw
         /// <param name="default"></param>
         /// <returns></returns>
         public async Task<TVal> SomeOrDefaultAsync(Func<Task<TVal>> @default)
-            => this.HasValue ? this.Value : await @default().ConfigureAwait(false);
+            => this.HasValue ? this._value : await @default().ConfigureAwait(false);
 
         /// <inheritdoc />
         public object BoxVal()
-            => this.Value;
+            => this._value;
 
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return HashCode.Combine(this.Value, this.HasValue, _initialized);
+            return HashCode.Combine(this._value, this.HasValue, _initialized);
         }
 
         /// <inheritdoc />
         public bool Equals(Option<TVal> other)
         {
             return
-                EqualityComparer<TVal>.Default.Equals(this.Value, other.Value) &&
+                EqualityComparer<TVal>.Default.Equals(this._value, other._value) &&
                 this.HasValue == other.HasValue &&
                 _initialized == other._initialized;
         }

@@ -14,7 +14,7 @@ namespace ArgonautCore.Lw
         /// <summary>
         /// Actual value that is held by this Some
         /// </summary>
-        public readonly TVal Value;
+        private readonly TVal _value;
 
         // Initialized is needed because structs will always have a default empty constructor.
         // We want to basically disallow that :)
@@ -30,7 +30,7 @@ namespace ArgonautCore.Lw
             if (value == null)
                 throw new NullReferenceException("Cannot construct a Some wrapper with a null value");
 
-            this.Value = value;
+            this._value = value;
             _initialized = true;
         }
 
@@ -69,7 +69,7 @@ namespace ArgonautCore.Lw
             if (!_initialized)
                 throw new NullReferenceException("This Some struct was created without initializing any data");
 
-            return Value;
+            return _value;
         }
 
         /// <summary>
@@ -84,12 +84,12 @@ namespace ArgonautCore.Lw
 
         /// <inheritdoc />
         public bool Equals(Some<TVal> other) =>
-            EqualityComparer<TVal>.Default.Equals(Value, other.Value) && _initialized == other._initialized;
+            EqualityComparer<TVal>.Default.Equals(_value, other._value) && _initialized == other._initialized;
 
         /// <inheritdoc />
         public override bool Equals(object obj) => obj is Some<TVal> other && Equals(other);
 
         /// <inheritdoc />
-        public override int GetHashCode() => HashCode.Combine(Value, _initialized);
+        public override int GetHashCode() => HashCode.Combine(_value, _initialized);
     }
 }
