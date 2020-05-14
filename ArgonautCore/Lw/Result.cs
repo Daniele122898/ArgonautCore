@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ArgonautCore.Lw
 {
@@ -104,6 +105,13 @@ namespace ArgonautCore.Lw
         public static implicit operator bool(Result<TVal, TErr> result)
             => result.HasValue;
 
+        /// <summary>
+        /// Syntactic sugar for Result.Some(). Just gets the value if it has one.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static TVal operator ~(Result<TVal, TErr> result)
+            => result.Some();
+        
         private TVal CheckValue()
         {
             if (!_initialized)
@@ -120,15 +128,93 @@ namespace ArgonautCore.Lw
             return _error;
         }
 
+        /// <summary>
+        /// Conditionally execute a lambda depending on whether the Result object has a value on an error
+        /// </summary>
+        /// <exception cref="NullReferenceException">If Result object has not been initialized.</exception>
+        public void Match(Action<TVal> some, Action<TErr> err)
+        {
+            if (this.HasValue)
+                some(_value);
+            else
+                err(this.CheckError());
+        }
+
+        /// <summary>
+        /// Conditionally execute a lambda depending on whether the Result object has a value or an error.
+        /// Forwards whatever the lambdas returned. 
+        /// </summary>
+        /// <exception cref="NullReferenceException">If Result object has not been initialized.</exception>
+        public T Match<T>(Func<TVal, T> some, Func<TErr, T> err)
+            => this.HasValue ? some(_value) : err(this.CheckError());
+
+        /// <summary>
+        /// Get the value of a Result if it has one. Throws otherwise.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public TVal Some()
+        {
+            if (!this.HasValue)
+                throw new NullReferenceException("Tried to access a value of a Result in a error or uninitialized state.");
+
+            return _value;
+        }
+
+        /// <summary>
+        /// Get the error of a Result if it has one. Throws otherwise.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public TErr Err()
+        {
+            if (!this.HasError)
+                throw new NullReferenceException("Tried to access a error of a Result in a success or uninitialized state.");
+
+            return _error;
+        }
+        
         /// <inheritdoc />
         public object BoxValue() => this._value;
 
         /// <inheritdoc />
         public object BoxError() => this._error;
 
-        public bool Equals(Result<TVal, TErr> other)
-        {
-            throw new NotImplementedException();
+        /// <inheritdoc />
+        public override int GetHashCode() {
+            return
+                this.HasValue ?
+                    HashCode.Combine(_value, this.HasValue, _initialized) :
+                    HashCode.Combine(_error, this.HasValue, _initialized);
         }
+
+        /// <inheritdoc />
+        public bool Equals(Result<TVal, TErr> other) {
+            return
+                (this.HasValue ?
+                    EqualityComparer<TVal>.Default.Equals(_value, other._value) :
+                    EqualityComparer<TErr>.Default.Equals(_error, other._error)
+                ) &&
+                this.HasValue == other.HasValue &&
+                _initialized == other._initialized;
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj) {
+            return obj is Result<TVal, TErr> other && Equals(other);
+        }
+
+        /// <summary>
+        /// Checks equality of two Result instances 
+        /// </summary>
+        public static bool operator ==(Result<TVal, TErr> left, Result<TVal, TErr> right) {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// Checks inequality of two Result instances 
+        /// </summary>
+        public static bool operator !=(Result<TVal, TErr> left, Result<TVal, TErr> right) {
+            return !left.Equals(right);
+        }
+
     }
 }
