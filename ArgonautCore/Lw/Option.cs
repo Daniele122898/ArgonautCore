@@ -141,6 +141,20 @@ namespace ArgonautCore.Lw
             if (this.HasValue)
                 some(this._value);
         }
+        
+        /// <summary>
+        /// Executes the lambda when a value is present, throws otherwise.
+        /// This will forward the result for convenience.
+        /// </summary>
+        /// <param name="some"></param>
+        /// <exception cref="NullReferenceException"></exception>
+        public T MatchSome<T>(Func<TVal, T> some)
+        {
+            if (this.HasValue)
+                return some(this._value);
+            
+            throw new NullReferenceException("Tried to access an option that had no value");
+        }
 
         /// <summary>
         /// Executes the lambda when a value is present, does nothing if there's none.
