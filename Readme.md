@@ -15,9 +15,6 @@
 </p>
 <hr/>
 
-This includes functional types that help building more robust and provable functions as well as 
-Database helpers / wrappers and Network helpers and wrappers.
-
 # !! Each project has their own in-depth readme. !!
 This Readme will just have general info. For usage and more info read the readme in the respective project folder :)
 
