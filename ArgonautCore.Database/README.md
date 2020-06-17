@@ -1,4 +1,8 @@
 ﻿# Database Fundamental Functions
+<a href="https://www.nuget.org/packages/ArgonautCore.Database/">
+    <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Database.svg?maxAge=2592000?style=plastic">
+</a>
+
 This mainly includes my implementation of the DB wrapper and transactor allowing you 
 to easily write repositories and add normal but also atomic queries.
 
