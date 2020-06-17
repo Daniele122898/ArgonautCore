@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore", "ArgonautCore\ArgonautCore.csproj", "{E591266A-57BF-4C78-8EEC-38154C4A3F93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Database", "ArgonautCore.Database\ArgonautCore.Database.csproj", "{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{E591266A-57BF-4C78-8EEC-38154C4A3F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E591266A-57BF-4C78-8EEC-38154C4A3F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E591266A-57BF-4C78-8EEC-38154C4A3F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
