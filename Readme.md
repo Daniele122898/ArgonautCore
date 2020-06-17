@@ -1,4 +1,6 @@
 # Argonaut Core
 
-This is a library that will house all my additional code that i use over the span of multiple projects. 
-This includes things like Maybe etc..
+These are fundamental functions and generally reusable code that I use across multiple projects.
+
+This includes functional types that help building more robust and provable functions as well as 
+Database helpers / wrappers and Network helpers and wrappers.
