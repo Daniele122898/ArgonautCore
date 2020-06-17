@@ -35,11 +35,13 @@ public class MyDbTransactor : TransactorBase<MyContext>
     {
         private readonly Func<MyContext> _contextFactory;
 
+        // Inject logging and context factory
         public SoraDbTransactor(ILogger<TransactorBase<MyContext>> logger, Func<MyContext> contextFactory) : base(logger)
         {
             _contextFactory = contextFactory;
         }
 
+        // Override abstract implementation of the context factory to use our injected func
         protected override MyContext CreateContext()
         {
             return _contextFactory();
