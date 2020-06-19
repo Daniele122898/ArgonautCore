@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore", "ArgonautCor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Database", "ArgonautCore.Database\ArgonautCore.Database.csproj", "{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Network", "ArgonautCore.Network\ArgonautCore.Network.csproj", "{59143011-B360-4C6C-B35C-9E04BB42B15B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CB69D4C-AA99-428C-8386-F4B078F4CDCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59143011-B360-4C6C-B35C-9E04BB42B15B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59143011-B360-4C6C-B35C-9E04BB42B15B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59143011-B360-4C6C-B35C-9E04BB42B15B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59143011-B360-4C6C-B35C-9E04BB42B15B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
