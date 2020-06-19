@@ -40,7 +40,7 @@ namespace ArgonautCore.Network
         }
 
         /// <summary>
-        /// Makes a request with the specified method and tries to parse the payload and response
+        /// Makes a request with the specified method and tries to parse the payload and response, assuming its JSON.
         /// </summary>
         /// <param name="endpoint">The endpoint to request</param>
         /// <param name="httpMethod">What http method to use</param>
