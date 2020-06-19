@@ -12,8 +12,15 @@ namespace ArgonautCore.Database
     /// <typeparam name="TContext">Type of context a concrete class will create and use</typeparam>
     public abstract class TransactorBase<TContext> : ITransactor<TContext> where TContext : DbContext
     {
+        /// <summary>
+        /// Logger instance used when stuff goes wrong
+        /// </summary>
         protected readonly ILogger<TransactorBase<TContext>> Logger;
 
+        /// <summary>
+        /// Constructor for Transactor base.
+        /// </summary>
+        /// <param name="logger"></param>
         protected TransactorBase(ILogger<TransactorBase<TContext>> logger)
         {
             Logger = logger;
@@ -76,6 +83,7 @@ namespace ArgonautCore.Database
             }
         }
 
+        /// <inheritdoc />
         public async Task<bool> TryDoInTransactionAsync(Func<TContext, Task<bool>> task)
         {
             await using var context = this.CreateContext();
@@ -95,6 +103,7 @@ namespace ArgonautCore.Database
             }
         }
 
+        /// <inheritdoc />
         public async Task<T> DoInTransactionAndGetAsync<T>(Func<TContext, Task<T>> task)
         {
             await using var context = this.CreateContext();
