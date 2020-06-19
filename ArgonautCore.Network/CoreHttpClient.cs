@@ -9,6 +9,11 @@ using ArgonautCore.Network.Extensions;
 
 namespace ArgonautCore.Network
 {
+    /// <summary>
+    /// <see cref="HttpClient"/> wrapper class for ease of use. Makes use of <see cref="Result{TVal,TErr}"/> lightweight wrapper.
+    /// This class will handle the lifecycle of the HttpClient. So make sure that if you pass a client that you are okey with it being disposed.
+    /// If this is not wished, set the boolean flag to not handle the lifecycle!
+    /// </summary>
     public class CoreHttpClient : IDisposable
     {
         private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions()
@@ -17,10 +22,13 @@ namespace ArgonautCore.Network
         };
 
         public readonly HttpClient Client;
+        
+        private readonly bool _skipLifeCycle;
 
-        public CoreHttpClient(HttpClient client)
+        public CoreHttpClient(HttpClient client, bool skipLifeCycle = false)
         {
             Client = client;
+            _skipLifeCycle = skipLifeCycle;
         }
 
         public CoreHttpClient(string baseAddress = null)
@@ -155,7 +163,8 @@ namespace ArgonautCore.Network
 
         public void Dispose()
         {
-            Client.Dispose();
+            if (!_skipLifeCycle)
+                Client.Dispose();
         }
     }
 }
