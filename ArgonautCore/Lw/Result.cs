@@ -112,6 +112,7 @@ namespace ArgonautCore.Lw
         public static TVal operator ~(Result<TVal, TErr> result)
             => result.Some();
         
+        // ReSharper disable once UnusedMember.Local
         private TVal CheckValue()
         {
             if (!_initialized)
