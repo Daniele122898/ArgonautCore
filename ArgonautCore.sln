@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Network", "Arg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Network.Authentication", "ArgonautCore.Network.Authentication\ArgonautCore.Network.Authentication.csproj", "{34963786-5BD3-4DA5-AAC2-48646D21DE52}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{979C0730-A1D6-4FA4-84B6-2E8F75B0406E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Network.Authentication.Test", "ArgonautCore.Network.Authentication.Test\ArgonautCore.Network.Authentication.Test.csproj", "{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,12 @@ Global
 		{34963786-5BD3-4DA5-AAC2-48646D21DE52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34963786-5BD3-4DA5-AAC2-48646D21DE52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34963786-5BD3-4DA5-AAC2-48646D21DE52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E} = {979C0730-A1D6-4FA4-84B6-2E8F75B0406E}
 	EndGlobalSection
 EndGlobal
