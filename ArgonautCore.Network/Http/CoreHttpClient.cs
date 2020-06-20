@@ -21,16 +21,29 @@ namespace ArgonautCore.Network.Http
             PropertyNameCaseInsensitive = true
         };
 
+        /// <summary>
+        /// The actual <see cref="HttpClient"/>.
+        /// </summary>
         public readonly HttpClient Client;
         
         private readonly bool _skipLifeCycle;
 
+        /// <summary>
+        /// Create an instance with an already created HttpClient. You can choose whether
+        /// this class will handle the lifecycle of the HttpClient on Dispose.
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="skipLifeCycle"></param>
         public CoreHttpClient(HttpClient client, bool skipLifeCycle = false)
         {
             Client = client;
             _skipLifeCycle = skipLifeCycle;
         }
 
+        /// <summary>
+        /// Create an empty instance and maybe pass a base address.
+        /// </summary>
+        /// <param name="baseAddress"></param>
         public CoreHttpClient(string baseAddress = null)
         {
             Client = new HttpClient()
@@ -161,6 +174,9 @@ namespace ArgonautCore.Network.Http
             return successMaybe;
         }
 
+        /// <summary>
+        /// Will clear the client if the skip lifecycle has not been specifically set to true.
+        /// </summary>
         public void Dispose()
         {
             if (!_skipLifeCycle)

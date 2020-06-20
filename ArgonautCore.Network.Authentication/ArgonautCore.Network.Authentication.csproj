@@ -9,18 +9,17 @@
         <Authors>daniele_serenity</Authors>
         <Company>Argonaut Developments</Company>
         <PackageProjectUrl>https://github.com/Daniele122898/ArgonautCore</PackageProjectUrl>
-        <Description>Network Expansion of Core Library</Description>
+        <Description>Network Authentication Expansion of Core Library</Description>
         <Copyright>Copyright 2020 (c) by Serenity. All rights reserved.</Copyright>
-        <PackageTags>Core CoreLibrary Network</PackageTags>
+        <PackageTags>Core Authentication Network</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\ArgonautCore.Network.xml</DocumentationFile>
+      <DocumentationFile>bin\Release\ArgonautCore.Network.Authentication.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="ArgonautCore" Version="1.5.1" />
-      <PackageReference Include="System.Text.Json" Version="4.7.2" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     </ItemGroup>
 
 </Project>
