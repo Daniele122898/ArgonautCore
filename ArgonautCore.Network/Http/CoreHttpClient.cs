@@ -7,7 +7,7 @@ using ArgonautCore.Lw;
 using ArgonautCore.Network.Enums;
 using ArgonautCore.Network.Extensions;
 
-namespace ArgonautCore.Network
+namespace ArgonautCore.Network.Http
 {
     /// <summary>
     /// <see cref="HttpClient"/> wrapper class for ease of use. Makes use of <see cref="Result{TVal,TErr}"/> lightweight wrapper.
