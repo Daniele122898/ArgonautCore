@@ -53,3 +53,12 @@ This library also makes use of the lightweight Result wrapper for a better error
 experience without try catch :)
 
 These functions are built upon eachother. The first function in the list below is the highest level and each function above calls the one below, just as a FYI. 
+
+# Network Custom Authentication Handlers
+<a href="https://www.nuget.org/packages/ArgonautCore.Network.Authentication/">
+    <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Network.Authentication.svg?maxAge=2592000?style=plastic">
+</a>
+
+These are helper functions and classes for custom authentication with a custom Authentication token / method.
+
+This mainly consists of a custom Api Key authentication handler that is customizable yet simple and easy to use. 

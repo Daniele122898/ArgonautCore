@@ -19,10 +19,7 @@ namespace ArgonautCore.Network.Authentication
         private readonly IServiceScopeFactory _factory;
         private const string _PROBLEM_DETAILS_CONTENT_TYPE = "application/problem+json";
         
-        private readonly string _apiKeyHeaderName;
         private readonly ILogger _log;
-        private readonly bool _enableLogging;
-        private readonly Func<string, IServiceScopeFactory, Task<AuthenticationResult>> _authFunc;
 
         /// <summary>
         /// Create a new instance. This should be left to the DI to do :)
@@ -41,13 +38,6 @@ namespace ArgonautCore.Network.Authentication
             IServiceScopeFactory factory) : base(options, logger, encoder, clock)
         {
             _factory = factory;
-            _apiKeyHeaderName = options.CurrentValue.ApiKeyHeaderName;
-
-            _authFunc = options.CurrentValue.AuthCheckFunc;
-            if (_authFunc == null)
-                throw new ArgumentNullException($"{nameof(options.CurrentValue.AuthCheckFunc)} cannot be null");
-
-            _enableLogging = options.CurrentValue.EnableLogging;
             _log = logger.CreateLogger(typeof(ApiKeyAuthenticationHandler));
         }
 
@@ -57,11 +47,11 @@ namespace ArgonautCore.Network.Authentication
         /// <returns></returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            if (!this.Request.Headers.TryGetValue(_apiKeyHeaderName, out var apiKeyHeaderValues))
+            if (!this.Request.Headers.TryGetValue(Options.ApiKeyHeaderName, out var apiKeyHeaderValues))
             {
                 return AuthenticateResult.NoResult();
             }
-            
+
             if (apiKeyHeaderValues.Count == 0) 
                 return AuthenticateResult.NoResult();
 
@@ -69,7 +59,7 @@ namespace ArgonautCore.Network.Authentication
             if (string.IsNullOrWhiteSpace(keyHeader))
                 return AuthenticateResult.NoResult();
 
-            var res = await _authFunc(keyHeader, _factory).ConfigureAwait(false);
+            var res = await Options.AuthCheckFunc(keyHeader, _factory).ConfigureAwait(false);
             if (!res.Success)
                 return AuthenticateResult.Fail(string.IsNullOrWhiteSpace(res.FailureReason) ? "Invalid authentication key." : res.FailureReason);
 
@@ -92,7 +82,7 @@ namespace ArgonautCore.Network.Authentication
             Response.StatusCode = 401;
             Response.ContentType = _PROBLEM_DETAILS_CONTENT_TYPE;
             
-            if (_enableLogging)
+            if (Options.EnableLogging)
                 _log.LogDebug($"[{this.Request.Method}] {(this.Request.Path.Value ?? "/")} was not authorized.");
 
             return Task.CompletedTask;
@@ -108,7 +98,7 @@ namespace ArgonautCore.Network.Authentication
             Response.StatusCode = 403;
             Response.ContentType = _PROBLEM_DETAILS_CONTENT_TYPE;
             
-            if (_enableLogging)
+            if (Options.EnableLogging)
                 _log.LogDebug($"[{this.Request.Method}] {(this.Request.Path.Value ?? "/")} was forbidden.");
 
             return Task.CompletedTask;

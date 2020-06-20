@@ -15,11 +15,11 @@ namespace ArgonautCore.Network.Authentication.Extensions
         /// </summary>
         /// <param name="authenticationBuilder"></param>
         /// <param name="options"></param>
-        /// <param name="defaultScheme"></param>
+        /// <param name="authScheme"></param>
         /// <returns></returns>
-        public static AuthenticationBuilder AddApiKeySupport(this AuthenticationBuilder authenticationBuilder, Action<ApiKeyAuthenticationOptions> options, string defaultScheme = "APIKey")
+        public static AuthenticationBuilder AddApiKeySupport(this AuthenticationBuilder authenticationBuilder, string authScheme, Action<ApiKeyAuthenticationOptions> options)
         {
-            return authenticationBuilder.AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(defaultScheme, options);
+            return authenticationBuilder.AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(authScheme,null, options);
         }
     }
 }
