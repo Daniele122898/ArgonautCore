@@ -1,7 +1,6 @@
 ﻿using System;
 using ArgonautCore.Network.Authentication.Models;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ArgonautCore.Network.Authentication.Extensions
 {
