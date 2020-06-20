@@ -7,7 +7,7 @@ using ArgonautCore.Lw;
 using ArgonautCore.Network.Enums;
 using ArgonautCore.Network.Extensions;
 
-namespace ArgonautCore.Network
+namespace ArgonautCore.Network.Http
 {
     /// <summary>
     /// <see cref="HttpClient"/> wrapper class for ease of use. Makes use of <see cref="Result{TVal,TErr}"/> lightweight wrapper.
@@ -21,16 +21,29 @@ namespace ArgonautCore.Network
             PropertyNameCaseInsensitive = true
         };
 
+        /// <summary>
+        /// The actual <see cref="HttpClient"/>.
+        /// </summary>
         public readonly HttpClient Client;
         
         private readonly bool _skipLifeCycle;
 
+        /// <summary>
+        /// Create an instance with an already created HttpClient. You can choose whether
+        /// this class will handle the lifecycle of the HttpClient on Dispose.
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="skipLifeCycle"></param>
         public CoreHttpClient(HttpClient client, bool skipLifeCycle = false)
         {
             Client = client;
             _skipLifeCycle = skipLifeCycle;
         }
 
+        /// <summary>
+        /// Create an empty instance and maybe pass a base address.
+        /// </summary>
+        /// <param name="baseAddress"></param>
         public CoreHttpClient(string baseAddress = null)
         {
             Client = new HttpClient()
@@ -40,7 +53,7 @@ namespace ArgonautCore.Network
         }
 
         /// <summary>
-        /// Makes a request with the specified method and tries to parse the payload and response
+        /// Makes a request with the specified method and tries to parse the payload and response, assuming its JSON.
         /// </summary>
         /// <param name="endpoint">The endpoint to request</param>
         /// <param name="httpMethod">What http method to use</param>
@@ -161,6 +174,9 @@ namespace ArgonautCore.Network
             return successMaybe;
         }
 
+        /// <summary>
+        /// Will clear the client if the skip lifecycle has not been specifically set to true.
+        /// </summary>
         public void Dispose()
         {
             if (!_skipLifeCycle)

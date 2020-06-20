@@ -12,6 +12,9 @@
     <a href="https://www.nuget.org/packages/ArgonautCore.Database/">
         <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Database.svg?maxAge=2592000?style=plastic">
     </a>
+    <a href="https://www.nuget.org/packages/ArgonautCore.Network/">
+        <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Network.svg?maxAge=2592000?style=plastic">
+    </a>
 </p>
 <hr/>
 
@@ -37,3 +40,16 @@ I also prefer to use `Result` or `Maybe` to propagate errors instead of throwing
 
 This mainly includes my implementation of the DB wrapper and transactor allowing you 
 to easily write repositories and add normal but also atomic queries.
+
+# Network Fundamental Functions
+<a href="https://www.nuget.org/packages/ArgonautCore.Network/">
+    <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Network.svg?maxAge=2592000?style=plastic">
+</a>
+
+This is just a neat HttpClient wrapper that provides some easy to use helper functions 
+to easily create requests and have them already mapped etc.
+
+This library also makes use of the lightweight Result wrapper for a better error handling
+experience without try catch :)
+
+These functions are built upon eachother. The first function in the list below is the highest level and each function above calls the one below, just as a FYI. 
