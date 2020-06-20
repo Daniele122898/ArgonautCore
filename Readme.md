@@ -15,6 +15,9 @@
     <a href="https://www.nuget.org/packages/ArgonautCore.Network/">
         <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Network.svg?maxAge=2592000?style=plastic">
     </a>
+    <a href="https://www.nuget.org/packages/ArgonautCore.Network.Authentication/">
+    <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Network.Authentication.svg?maxAge=2592000?style=plastic">
+</a>
 </p>
 <hr/>
 
