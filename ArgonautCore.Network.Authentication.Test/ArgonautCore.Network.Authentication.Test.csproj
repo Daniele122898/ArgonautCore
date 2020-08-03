@@ -4,10 +4,6 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile></DocumentationFile>
-    </PropertyGroup>
-
     <ItemGroup>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
     </ItemGroup>
