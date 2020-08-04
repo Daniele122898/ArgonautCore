@@ -65,3 +65,10 @@ These functions are built upon eachother. The first function in the list below i
 These are helper functions and classes for custom authentication with a custom Authentication token / method.
 
 This mainly consists of a custom Api Key authentication handler that is customizable yet simple and easy to use. 
+
+# Cache
+<a href="https://www.nuget.org/packages/ArgonautCore.Network.Authentication/">
+    <img src="https://img.shields.io/nuget/vpre/ArgonautCore.Cache.svg?maxAge=2592000?style=plastic">
+</a>
+
+Simple thread-safe cache with TTL and automated cleanup. 
