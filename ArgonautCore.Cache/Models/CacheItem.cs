@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArgonautCore.Cache.Services
+namespace ArgonautCore.Cache.Models
 {
     /// <summary>
     /// Wrapper around a cached item with additional data
