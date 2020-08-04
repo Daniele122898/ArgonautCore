@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ArgonautCore.Cache.Models;
 using ArgonautCore.Lw;
 
 namespace ArgonautCore.Cache.Services
