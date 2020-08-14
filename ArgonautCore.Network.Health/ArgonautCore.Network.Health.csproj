@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>8</LangVersion>
+
+        <PackageId>ArgonautCore.Network.Health</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>daniele_serenity</Authors>
+        <Company>Argonaut Developments</Company>
+        <PackageProjectUrl>https://github.com/Daniele122898/ArgonautCore</PackageProjectUrl>
+        <Description>Network Health Expansion of Core Library</Description>
+        <Copyright>Copyright 2020 (c) by Serenity. All rights reserved.</Copyright>
+        <PackageTags>Core Health Network</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\ArgonautCore.Network.Health.xml</DocumentationFile>
+    </PropertyGroup>
+
+</Project>
