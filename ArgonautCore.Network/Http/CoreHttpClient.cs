@@ -143,6 +143,7 @@ namespace ArgonautCore.Network.Http
                         HttpMethods.Post => await Client.PostAsync(endpoint, content).ConfigureAwait(false),
                         HttpMethods.Put => await Client.PutAsync(endpoint, content).ConfigureAwait(false),
                         HttpMethods.Patch => await Client.PatchAsync(endpoint, content).ConfigureAwait(false),
+                        // ReSharper disable once UnreachableSwitchArmDueToIntegerAnalysis
                         _ => null // Just for the sake of it :P
                     };
                     break;
