@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Network.Authen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Cache", "ArgonautCore.Cache\ArgonautCore.Cache.csproj", "{6A570338-24EF-425E-9942-7F198E8FF4FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgonautCore.Network.Health", "ArgonautCore.Network.Health\ArgonautCore.Network.Health.csproj", "{F6B5FD02-2D42-4469-9252-80C5D1865F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{6A570338-24EF-425E-9942-7F198E8FF4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A570338-24EF-425E-9942-7F198E8FF4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A570338-24EF-425E-9942-7F198E8FF4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B5FD02-2D42-4469-9252-80C5D1865F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B5FD02-2D42-4469-9252-80C5D1865F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B5FD02-2D42-4469-9252-80C5D1865F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B5FD02-2D42-4469-9252-80C5D1865F27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2ABD6E12-04B9-4AC7-B1E2-53AFCD86519E} = {979C0730-A1D6-4FA4-84B6-2E8F75B0406E}
