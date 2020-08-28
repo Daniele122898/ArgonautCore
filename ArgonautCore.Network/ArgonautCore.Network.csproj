@@ -5,7 +5,7 @@
         <LangVersion>8</LangVersion>
 
         <PackageId>ArgonautCore.Network</PackageId>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <Authors>daniele_serenity</Authors>
         <Company>Argonaut Developments</Company>
         <PackageProjectUrl>https://github.com/Daniele122898/ArgonautCore</PackageProjectUrl>
