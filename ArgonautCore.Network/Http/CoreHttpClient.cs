@@ -28,6 +28,9 @@ namespace ArgonautCore.Network.Http
         
         private readonly bool _skipLifeCycle;
 
+        /// <summary>
+        /// Create a Core http client with a custom timeout
+        /// </summary>
         public CoreHttpClient(TimeSpan timeout)
         {
             Client = new HttpClient {Timeout = timeout};
