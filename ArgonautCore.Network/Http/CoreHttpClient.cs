@@ -28,28 +28,36 @@ namespace ArgonautCore.Network.Http
         
         private readonly bool _skipLifeCycle;
 
+        public CoreHttpClient(TimeSpan timeout)
+        {
+            Client = new HttpClient {Timeout = timeout};
+        }
+
         /// <summary>
         /// Create an instance with an already created HttpClient. You can choose whether
         /// this class will handle the lifecycle of the HttpClient on Dispose.
         /// </summary>
-        /// <param name="client"></param>
-        /// <param name="skipLifeCycle"></param>
-        public CoreHttpClient(HttpClient client, bool skipLifeCycle = false)
+        public CoreHttpClient(HttpClient client, bool skipLifeCycle = false, TimeSpan? timeout = null)
         {
             Client = client;
             _skipLifeCycle = skipLifeCycle;
+
+            if (timeout != null)
+                Client.Timeout = timeout.Value;
         }
 
         /// <summary>
         /// Create an empty instance and maybe pass a base address.
         /// </summary>
-        /// <param name="baseAddress"></param>
-        public CoreHttpClient(string baseAddress = null)
+        public CoreHttpClient(string baseAddress = null, TimeSpan? timeout = null)
         {
             Client = new HttpClient()
             {
                 BaseAddress = string.IsNullOrWhiteSpace(baseAddress) ? null : new Uri(baseAddress)
             };
+            
+            if (timeout != null)
+                Client.Timeout = timeout.Value;
         }
 
         /// <summary>
