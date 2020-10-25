@@ -70,13 +70,15 @@ namespace ArgonautCore.Network.Http
         /// <param name="httpMethod">What http method to use</param>
         /// <param name="payload">The payload to send on a post request</param>
         /// <param name="castPayloadWithoutJsonParsing">Whether to cast the payload to HttpContent directly instead of json parsing.</param>
+        /// <param name="httpContent">When the httpContent is set then it will ignore the <see cref="payload"/> and <see cref="castPayloadWithoutJsonParsing"/> params.</param>
         /// <typeparam name="T">The type that is expected to be returned and parsed</typeparam>
         /// <returns>The parsed return</returns>
         public async Task<Result<T, Error>> GetAndMapResponse<T>(
             string endpoint,
             HttpMethods httpMethod = HttpMethods.Get,
             object payload = null,
-            bool castPayloadWithoutJsonParsing = false)
+            bool castPayloadWithoutJsonParsing = false,
+            HttpContent httpContent = null)
         {
             var respRes = await GetResponse(endpoint, httpMethod, payload, false,
                 castPayloadWithoutJsonParsing).ConfigureAwait(false);
@@ -94,13 +96,15 @@ namespace ArgonautCore.Network.Http
         /// <param name="payload">The payload to send on a post request</param>
         /// <param name="expectNonJson">Whether this method should throw when the response is not json or not. Default is NOT throwing</param>
         /// <param name="castPayloadWithoutJsonParsing">Whether to cast the payload to HttpContent directly instead of json parsing.</param>
+        /// <param name="httpContent">When the httpContent is set then it will ignore the <see cref="payload"/> and <see cref="castPayloadWithoutJsonParsing"/> params.</param>
         /// <returns>The raw string return</returns>
         public async Task<Result<string, Error>> GetResponse(
             string endpoint,
             HttpMethods httpMethod = HttpMethods.Get,
             object payload = null,
             bool expectNonJson = true,
-            bool castPayloadWithoutJsonParsing = false)
+            bool castPayloadWithoutJsonParsing = false,
+            HttpContent httpContent = null)
         {
             var respResult = await this.GetRawResponseAndEnsureSuccess(endpoint, httpMethod, payload,
                 castPayloadWithoutJsonParsing).ConfigureAwait(false);
@@ -126,12 +130,14 @@ namespace ArgonautCore.Network.Http
         /// <param name="httpMethod">What http method to use</param>
         /// <param name="payload">The payload to send on a post request</param>
         /// <param name="castPayloadWithoutJsonParsing">Whether to cast the payload to HttpContent directly instead of json parsing.</param>
+        /// <param name="httpContent">When the httpContent is set then it will ignore the <see cref="payload"/> and <see cref="castPayloadWithoutJsonParsing"/> params.</param>
         /// <returns>The raw response object</returns>
         public async Task<Result<HttpResponseMessage, Error>> GetRawResponseAndEnsureSuccess(
             string endpoint,
             HttpMethods httpMethod = HttpMethods.Get,
             object payload = null,
-            bool castPayloadWithoutJsonParsing = false)
+            bool castPayloadWithoutJsonParsing = false,
+            HttpContent httpContent = null)
         {
             HttpResponseMessage response;
 
@@ -144,10 +150,11 @@ namespace ArgonautCore.Network.Http
                 case HttpMethods.Patch:
                 case HttpMethods.Put:
 
-                    HttpContent content = castPayloadWithoutJsonParsing
-                        ? (HttpContent) payload
-                        : new StringContent(JsonSerializer.Serialize(payload, _jsonOptions), Encoding.UTF8,
-                            "application/json");
+                    HttpContent content = httpContent ?? (
+                        castPayloadWithoutJsonParsing
+                            ? (HttpContent) payload
+                            : new StringContent(JsonSerializer.Serialize(payload, _jsonOptions), Encoding.UTF8,
+                                "application/json"));
 
                     response = httpMethod switch
                     {
