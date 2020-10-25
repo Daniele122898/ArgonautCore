@@ -70,7 +70,7 @@ namespace ArgonautCore.Network.Http
         /// <param name="httpMethod">What http method to use</param>
         /// <param name="payload">The payload to send on a post request</param>
         /// <param name="castPayloadWithoutJsonParsing">Whether to cast the payload to HttpContent directly instead of json parsing.</param>
-        /// <param name="httpContent">When the httpContent is set then it will ignore the <see cref="payload"/> and <see cref="castPayloadWithoutJsonParsing"/> params.</param>
+        /// <param name="httpContent">When the httpContent is set then it will ignore the payload and castPayloadWithoutJsonParsing params.</param>
         /// <typeparam name="T">The type that is expected to be returned and parsed</typeparam>
         /// <returns>The parsed return</returns>
         public async Task<Result<T, Error>> GetAndMapResponse<T>(
@@ -81,7 +81,7 @@ namespace ArgonautCore.Network.Http
             HttpContent httpContent = null)
         {
             var respRes = await GetResponse(endpoint, httpMethod, payload, false,
-                castPayloadWithoutJsonParsing).ConfigureAwait(false);
+                castPayloadWithoutJsonParsing, httpContent).ConfigureAwait(false);
 
             return respRes.Match<Result<T, Error>>(
                 some: respString => JsonSerializer.Deserialize<T>(respString, _jsonOptions),
@@ -96,7 +96,7 @@ namespace ArgonautCore.Network.Http
         /// <param name="payload">The payload to send on a post request</param>
         /// <param name="expectNonJson">Whether this method should throw when the response is not json or not. Default is NOT throwing</param>
         /// <param name="castPayloadWithoutJsonParsing">Whether to cast the payload to HttpContent directly instead of json parsing.</param>
-        /// <param name="httpContent">When the httpContent is set then it will ignore the <see cref="payload"/> and <see cref="castPayloadWithoutJsonParsing"/> params.</param>
+        /// <param name="httpContent">When the httpContent is set then it will ignore the payload and castPayloadWithoutJsonParsing params.</param>
         /// <returns>The raw string return</returns>
         public async Task<Result<string, Error>> GetResponse(
             string endpoint,
@@ -107,7 +107,7 @@ namespace ArgonautCore.Network.Http
             HttpContent httpContent = null)
         {
             var respResult = await this.GetRawResponseAndEnsureSuccess(endpoint, httpMethod, payload,
-                castPayloadWithoutJsonParsing).ConfigureAwait(false);
+                castPayloadWithoutJsonParsing, httpContent).ConfigureAwait(false);
 
             return await respResult.Match<Task<Result<string, Error>>>(
                 some: async (HttpResponseMessage response) =>
@@ -130,7 +130,7 @@ namespace ArgonautCore.Network.Http
         /// <param name="httpMethod">What http method to use</param>
         /// <param name="payload">The payload to send on a post request</param>
         /// <param name="castPayloadWithoutJsonParsing">Whether to cast the payload to HttpContent directly instead of json parsing.</param>
-        /// <param name="httpContent">When the httpContent is set then it will ignore the <see cref="payload"/> and <see cref="castPayloadWithoutJsonParsing"/> params.</param>
+        /// <param name="httpContent">When the httpContent is set then it will ignore the payload and castPayloadWithoutJsonParsing params.</param>
         /// <returns>The raw response object</returns>
         public async Task<Result<HttpResponseMessage, Error>> GetRawResponseAndEnsureSuccess(
             string endpoint,
