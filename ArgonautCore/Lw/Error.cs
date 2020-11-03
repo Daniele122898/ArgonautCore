@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace ArgonautCore.Lw
 {
@@ -52,6 +53,19 @@ namespace ArgonautCore.Lw
                 ? Option.Some<Error>(new Error(ex.InnerException))
                 : Option.None<Error>();
             this.Trace = ex.StackTrace != null ? Option.Some(ex.StackTrace) : Option.None<string>();
+        }
+
+        /// <summary>
+        /// Pretty print the Error function with recursion in the Inner exception
+        /// </summary>
+        /// <returns>Formatted error string</returns>
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(this.Message.Get());
+            this.Cause.MatchSome(err => sb.AppendLine(err.ToString()));
+            this.Trace.MatchSome(trace => sb.AppendLine(trace));
+            return sb.ToString();
         }
     }
 }
